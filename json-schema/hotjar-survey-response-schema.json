@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hotjar.com/schemas/hotjar/survey-response.json",
+  "title": "Hotjar Survey Response",
+  "description": "A single response to a Hotjar survey, containing the answers provided by a respondent along with optional comments and tags.",
+  "type": "object",
+  "required": ["id", "answers"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the survey response."
+    },
+    "answers": {
+      "type": "array",
+      "description": "The list of answers provided by the respondent.",
+      "items": {
+        "$ref": "#/$defs/SurveyAnswer"
+      }
+    },
+    "comment": {
+      "type": ["string", "null"],
+      "description": "An optional comment provided by the respondent."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with this survey response for categorization.",
+      "items": {
+        "$ref": "#/$defs/SurveyResponseTag"
+      }
+    }
+  },
+  "$defs": {
+    "SurveyAnswer": {
+      "type": "object",
+      "description": "An individual answer to a survey question.",
+      "required": ["question_id", "answer"],
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "The unique identifier of the question being answered."
+        },
+        "answer": {
+          "type": "string",
+          "description": "The text of the answer provided by the respondent."
+        }
+      }
+    },
+    "SurveyResponseTag": {
+      "type": "object",
+      "description": "A tag associated with a survey response.",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tag."
+        }
+      }
+    }
+  }
+}

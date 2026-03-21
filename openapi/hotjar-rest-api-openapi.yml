@@ -1,0 +1,588 @@
+openapi: 3.1.0
+info:
+  title: Hotjar REST API
+  description: >-
+    The Hotjar REST API provides programmatic access to Hotjar data and
+    functionality. It allows developers to export survey responses, list
+    surveys, automate user lookup and deletion requests, and integrate
+    Hotjar data into external tools and workflows. The API uses OAuth
+    client credentials authentication, returns JSON responses, supports
+    cursor-based pagination, and is rate limited to 3000 requests per
+    minute. It is available on Observe and Ask Scale plans.
+  version: '1.0'
+  contact:
+    name: Hotjar Support
+    url: https://help.hotjar.com
+  termsOfService: https://www.hotjar.com/legal/policies/terms-of-service/
+externalDocs:
+  description: Hotjar API Reference
+  url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+servers:
+  - url: https://api.hotjar.io/v1
+    description: Hotjar Production API Server
+tags:
+  - name: Authentication
+    description: >-
+      OAuth 2.0 client credentials authentication endpoints for obtaining
+      access tokens.
+  - name: Surveys
+    description: >-
+      Endpoints for listing surveys and retrieving survey details for a
+      specific site.
+  - name: Survey Responses
+    description: >-
+      Endpoints for exporting and listing survey response data with
+      cursor-based pagination.
+  - name: User Lookup
+    description: >-
+      Endpoints for looking up user data and submitting deletion requests
+      for GDPR compliance.
+security:
+  - bearerAuth: []
+paths:
+  /oauth/token:
+    post:
+      operationId: createOAuthToken
+      summary: Obtain an OAuth access token
+      description: >-
+        Obtains an OAuth 2.0 access token using the client credentials grant
+        type. The request must be encoded as application/x-www-form-urlencoded
+        and include the client_id, client_secret, and grant_type parameters.
+        The returned access token should be included as a Bearer token in the
+        Authorization header of subsequent API requests.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  description: >-
+                    The OAuth 2.0 grant type. Must be set to client_credentials.
+                client_id:
+                  type: string
+                  description: >-
+                    The client ID from your Hotjar API key pair.
+                client_secret:
+                  type: string
+                  description: >-
+                    The client secret from your Hotjar API key pair.
+      responses:
+        '200':
+          description: Successfully obtained access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthToken'
+        '401':
+          description: Invalid client credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /sites/{site_id}/surveys:
+    get:
+      operationId: listSurveys
+      summary: List surveys for a site
+      description: >-
+        Returns a paginated list of surveys for a specific site. Supports
+        cursor-based pagination and optionally includes question details
+        in the response. The site_id can be found in the Sites and
+        Organizations page in your Hotjar account.
+      tags:
+        - Surveys
+      parameters:
+        - $ref: '#/components/parameters/SiteId'
+        - $ref: '#/components/parameters/WithQuestions'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Successfully retrieved list of surveys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyListResponse'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /sites/{site_id}/surveys/{survey_id}:
+    get:
+      operationId: getSurvey
+      summary: Get a specific survey
+      description: >-
+        Returns the details of a specific survey for a site, including
+        its questions, configuration, and status.
+      tags:
+        - Surveys
+      parameters:
+        - $ref: '#/components/parameters/SiteId'
+        - $ref: '#/components/parameters/SurveyId'
+      responses:
+        '200':
+          description: Successfully retrieved survey details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Survey or site not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /sites/{site_id}/surveys/{survey_id}/responses:
+    get:
+      operationId: listSurveyResponses
+      summary: List survey responses
+      description: >-
+        Returns a paginated list of responses for a specific survey. Responses
+        are sorted by creation date in descending order, with the most recent
+        responses returned first. Supports cursor-based pagination with a
+        maximum of 100 responses per page. Available on Ask Scale plans.
+      tags:
+        - Survey Responses
+      parameters:
+        - $ref: '#/components/parameters/SiteId'
+        - $ref: '#/components/parameters/SurveyId'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Successfully retrieved list of survey responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyResponseListResponse'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Survey or site not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /organizations/{organization_id}/user-lookup:
+    post:
+      operationId: userLookup
+      summary: Look up or delete user data
+      description: >-
+        Looks up user data across sites in an organization and optionally
+        deletes all associated data. This endpoint supports GDPR compliance
+        by enabling automated user data lookup and deletion requests. At
+        least one of data_subject_email or data_subject_site_id_to_user_id_map
+        must be provided. Available on Observe and Ask Scale plans.
+      tags:
+        - User Lookup
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLookupRequest'
+      responses:
+        '200':
+          description: Successfully processed user lookup or deletion request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLookupResponse'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Organization not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token obtained from the OAuth token endpoint using client
+        credentials grant.
+
+  parameters:
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier for the site. Can be found in the Sites and
+        Organizations page under the respective organization.
+      schema:
+        type: integer
+
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier for the survey.
+      schema:
+        type: integer
+
+    OrganizationId:
+      name: organization_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier for the organization.
+      schema:
+        type: integer
+
+    WithQuestions:
+      name: with_questions
+      in: query
+      required: false
+      description: >-
+        Flag indicating whether question information should be included
+        in the response. Defaults to false.
+      schema:
+        type: boolean
+        default: false
+
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: >-
+        The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: >-
+        The cursor value for fetching the next page of results. Obtained
+        from the next_cursor field in a previous response.
+      schema:
+        type: string
+
+  schemas:
+    OAuthToken:
+      type: object
+      description: >-
+        An OAuth 2.0 access token response returned after successful
+        client credentials authentication.
+      properties:
+        access_token:
+          type: string
+          description: >-
+            The access token to use in the Authorization header of API requests.
+        token_type:
+          type: string
+          description: >-
+            The type of token issued. Always bearer.
+          enum:
+            - bearer
+        expires_in:
+          type: integer
+          description: >-
+            The number of seconds until the access token expires.
+
+    Survey:
+      type: object
+      description: >-
+        A Hotjar survey with its configuration, status, and optional
+        question details.
+      properties:
+        id:
+          type: integer
+          description: >-
+            The unique identifier for the survey.
+        name:
+          type: string
+          description: >-
+            The name of the survey.
+        type:
+          type: string
+          description: >-
+            The type of survey, such as popover, fullscreen, or external link.
+        is_enabled:
+          type: boolean
+          description: >-
+            Whether the survey is currently active and collecting responses.
+        created_time:
+          type: string
+          format: date-time
+          description: >-
+            The ISO 8601 timestamp when the survey was created.
+        url:
+          type: string
+          description: >-
+            The URL path to the survey resource in the API.
+        responses_url:
+          type: string
+          description: >-
+            The URL path to retrieve the survey responses.
+        sentiment_analysis_enabled:
+          type: boolean
+          description: >-
+            Whether sentiment analysis is enabled for this survey.
+        questions:
+          type: array
+          description: >-
+            The list of questions in the survey. Only included when
+            with_questions parameter is set to true.
+          items:
+            $ref: '#/components/schemas/SurveyQuestion'
+
+    SurveyQuestion:
+      type: object
+      description: >-
+        A question within a Hotjar survey, including its type, text,
+        and available answer options.
+      properties:
+        id:
+          type: integer
+          description: >-
+            The unique identifier for the question.
+        text:
+          type: string
+          description: >-
+            The text content of the question displayed to respondents.
+        type:
+          type: string
+          description: >-
+            The type of question, such as long-text, short-text, rating,
+            multiple-choice, or nps.
+        is_required:
+          type: boolean
+          description: >-
+            Whether the question requires an answer before submission.
+        choices:
+          type: array
+          nullable: true
+          description: >-
+            The list of answer choices for multiple-choice questions.
+            Null for open-ended question types.
+          items:
+            type: string
+        labels:
+          type: object
+          nullable: true
+          description: >-
+            Labels for rating or scale questions. Null for other
+            question types.
+        image_url:
+          type: string
+          nullable: true
+          description: >-
+            URL of an image attached to the question. Null if no image
+            is attached.
+
+    SurveyResponse:
+      type: object
+      description: >-
+        A single response to a Hotjar survey, containing the answers
+        provided by a respondent.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier for the survey response.
+        answers:
+          type: array
+          description: >-
+            The list of answers provided in this response.
+          items:
+            $ref: '#/components/schemas/SurveyAnswer'
+        comment:
+          type: string
+          nullable: true
+          description: >-
+            An optional comment provided by the respondent.
+        tags:
+          type: array
+          description: >-
+            Tags associated with this survey response.
+          items:
+            $ref: '#/components/schemas/SurveyResponseTag'
+
+    SurveyAnswer:
+      type: object
+      description: >-
+        An individual answer to a survey question within a response.
+      properties:
+        question_id:
+          type: string
+          description: >-
+            The unique identifier of the question being answered.
+        answer:
+          type: string
+          description: >-
+            The text of the answer provided by the respondent.
+
+    SurveyResponseTag:
+      type: object
+      description: >-
+        A tag associated with a survey response for categorization
+        and filtering.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the tag.
+
+    SurveyListResponse:
+      type: object
+      description: >-
+        A paginated list of surveys with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: >-
+            The list of surveys returned in this page.
+          items:
+            $ref: '#/components/schemas/Survey'
+        next_cursor:
+          type: string
+          nullable: true
+          description: >-
+            The cursor value to use for fetching the next page. Null when
+            there are no more results.
+
+    SurveyResponseListResponse:
+      type: object
+      description: >-
+        A paginated list of survey responses with cursor-based pagination
+        support.
+      properties:
+        results:
+          type: array
+          description: >-
+            The list of survey responses returned in this page.
+          items:
+            $ref: '#/components/schemas/SurveyResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: >-
+            The cursor value to use for fetching the next page. Null when
+            there are no more results.
+
+    UserLookupRequest:
+      type: object
+      description: >-
+        A request to look up or delete user data across sites in an
+        organization. At least one of data_subject_email or
+        data_subject_site_id_to_user_id_map must be provided.
+      properties:
+        data_subject_email:
+          type: string
+          format: email
+          description: >-
+            The email address of the data subject to look up.
+        data_subject_site_id_to_user_id_map:
+          type: object
+          description: >-
+            A map of site IDs to user IDs on your site, used when user
+            attributes have been sent via the Identify API.
+          additionalProperties:
+            type: string
+        delete_all_hits:
+          type: boolean
+          description: >-
+            Whether to immediately delete all found data for the user.
+            Set to true to submit a deletion request.
+          default: false
+
+    UserLookupResponse:
+      type: object
+      description: >-
+        The result of a user lookup or deletion request.
+      properties:
+        status:
+          type: string
+          description: >-
+            The status of the lookup or deletion request.
+        message:
+          type: string
+          description: >-
+            A human-readable message describing the result.
+
+    Error:
+      type: object
+      description: >-
+        An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: >-
+            The error type or code.
+        message:
+          type: string
+          description: >-
+            A human-readable description of the error.

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hotjar.com/schemas/hotjar/survey.json",
+  "title": "Hotjar Survey",
+  "description": "A Hotjar survey definition including its configuration, status, and questions.",
+  "type": "object",
+  "required": ["id", "name", "type"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier for the survey."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the survey.",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of survey.",
+      "enum": ["popover", "fullscreen", "external_link"]
+    },
+    "is_enabled": {
+      "type": "boolean",
+      "description": "Whether the survey is currently active and collecting responses."
+    },
+    "created_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 timestamp when the survey was created."
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL path to the survey resource in the API."
+    },
+    "responses_url": {
+      "type": "string",
+      "description": "The URL path to retrieve the survey responses."
+    },
+    "sentiment_analysis_enabled": {
+      "type": "boolean",
+      "description": "Whether sentiment analysis is enabled for this survey."
+    },
+    "questions": {
+      "type": "array",
+      "description": "The list of questions in the survey.",
+      "items": {
+        "$ref": "#/$defs/SurveyQuestion"
+      }
+    }
+  },
+  "$defs": {
+    "SurveyQuestion": {
+      "type": "object",
+      "description": "A question within a Hotjar survey.",
+      "required": ["id", "text", "type"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique identifier for the question."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the question displayed to respondents.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of question.",
+          "enum": ["long-text", "short-text", "rating", "multiple-choice", "nps", "single-choice"]
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "Whether the question requires an answer before submission."
+        },
+        "choices": {
+          "type": ["array", "null"],
+          "description": "The list of answer choices for multiple-choice questions. Null for open-ended question types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": ["object", "null"],
+          "description": "Labels for rating or scale questions. Null for other question types."
+        },
+        "image_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "URL of an image attached to the question. Null if no image is attached."
+        }
+      }
+    }
+  }
+}

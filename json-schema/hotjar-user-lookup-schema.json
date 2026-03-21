@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hotjar.com/schemas/hotjar/user-lookup.json",
+  "title": "Hotjar User Lookup Request",
+  "description": "A request to look up or delete user data across sites in a Hotjar organization for GDPR compliance. At least one of data_subject_email or data_subject_site_id_to_user_id_map must be provided.",
+  "type": "object",
+  "properties": {
+    "data_subject_email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the data subject to look up."
+    },
+    "data_subject_site_id_to_user_id_map": {
+      "type": "object",
+      "description": "A map of site IDs to user IDs on your site, used when user attributes have been sent via the Identify API.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "The user ID on your site associated with the given site ID."
+      }
+    },
+    "delete_all_hits": {
+      "type": "boolean",
+      "description": "Whether to immediately delete all found data for the user. Set to true to submit a deletion request.",
+      "default": false
+    }
+  },
+  "anyOf": [
+    { "required": ["data_subject_email"] },
+    { "required": ["data_subject_site_id_to_user_id_map"] }
+  ]
+}

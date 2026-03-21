@@ -1,0 +1,105 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "hotjar": "https://api.hotjar.io/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Survey": {
+      "@id": "hotjar:Survey",
+      "@context": {
+        "name": "schema:name",
+        "type": "hotjar:surveyType",
+        "is_enabled": "hotjar:isEnabled",
+        "created_time": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "responses_url": {
+          "@id": "hotjar:responsesUrl",
+          "@type": "@id"
+        },
+        "sentiment_analysis_enabled": "hotjar:sentimentAnalysisEnabled",
+        "questions": {
+          "@id": "hotjar:questions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "SurveyQuestion": {
+      "@id": "hotjar:SurveyQuestion",
+      "@context": {
+        "text": "schema:text",
+        "type": "hotjar:questionType",
+        "is_required": "hotjar:isRequired",
+        "choices": {
+          "@id": "hotjar:choices",
+          "@container": "@set"
+        },
+        "image_url": {
+          "@id": "schema:image",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "SurveyResponse": {
+      "@id": "hotjar:SurveyResponse",
+      "@context": {
+        "answers": {
+          "@id": "hotjar:answers",
+          "@container": "@set"
+        },
+        "comment": "schema:comment",
+        "tags": {
+          "@id": "hotjar:tags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "SurveyAnswer": {
+      "@id": "hotjar:SurveyAnswer",
+      "@context": {
+        "question_id": "hotjar:questionId",
+        "answer": "schema:text"
+      }
+    },
+
+    "Site": {
+      "@id": "hotjar:Site",
+      "@context": {
+        "name": "schema:name",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "UserAttribute": {
+      "@id": "hotjar:UserAttribute",
+      "@context": {
+        "user_id": "schema:identifier",
+        "attributes": "hotjar:attributes"
+      }
+    },
+
+    "Event": {
+      "@id": "hotjar:Event",
+      "@context": {
+        "action_name": "schema:name",
+        "timestamp": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}
