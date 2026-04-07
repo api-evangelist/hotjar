@@ -1,23 +1,19 @@
 aid: hotjar
-url: 
-  https://raw.githubusercontent.com/api-evangelist/hotjar/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/hotjar/refs/heads/main/apis.yml
 apis:
   - aid: hotjar:rest-api
     name: Hotjar REST API
     tags:
       - Analytics
-      - Surveys
-      - Heatmaps
       - Behavior
+      - Heatmaps
+      - Surveys
       - User Feedback
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.hotjar.com
-    humanURL: 
-      https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+    humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
     properties:
-      - url: 
-          https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+      - url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
         type: Documentation
       - url: openapi/hotjar-rest-api-openapi.yml
         type: OpenAPI
@@ -32,20 +28,17 @@ apis:
   - aid: hotjar:events-api
     name: Hotjar Events API
     tags:
+      - Analytics
       - Events
-      - Tracking
       - Heatmaps
       - Recordings
       - Surveys
-      - Analytics
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Tracking
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
-    humanURL: 
-      https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
+    humanURL: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
     properties:
-      - url: 
-          https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
+      - url: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
         type: Documentation
     description: >-
       The Hotjar Events API is a client-side JavaScript API that allows
@@ -58,19 +51,16 @@ apis:
   - aid: hotjar:identify-api
     name: Hotjar Identify API
     tags:
-      - Users
-      - Attributes
-      - Segmentation
       - Analytics
+      - Attributes
       - Personalization
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Segmentation
+      - Users
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
-    humanURL: 
-      https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
+    humanURL: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
     properties:
-      - url: 
-          https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
+      - url: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
         type: Documentation
     description: >-
       The Hotjar Identify API is a client-side JavaScript API that allows
@@ -83,13 +73,12 @@ apis:
   - aid: hotjar:javascript-sdk
     name: Hotjar JavaScript SDK
     tags:
+      - Analytics
+      - Browser
       - JavaScript
       - SDK
-      - Analytics
       - Tracking
-      - Browser
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://github.com/hotjar/hotjar-js
     properties:

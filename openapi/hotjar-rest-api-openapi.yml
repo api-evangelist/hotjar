@@ -25,14 +25,14 @@ tags:
     description: >-
       OAuth 2.0 client credentials authentication endpoints for obtaining
       access tokens.
-  - name: Surveys
-    description: >-
-      Endpoints for listing surveys and retrieving survey details for a
-      specific site.
   - name: Survey Responses
     description: >-
       Endpoints for exporting and listing survey response data with
       cursor-based pagination.
+  - name: Surveys
+    description: >-
+      Endpoints for listing surveys and retrieving survey details for a
+      specific site.
   - name: User Lookup
     description: >-
       Endpoints for looking up user data and submitting deletion requests
