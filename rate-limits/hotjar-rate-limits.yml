@@ -1,0 +1,29 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Hotjar (Contentsquare)
+providerId: hotjar
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Analytics
+description: Hotjar/Contentsquare API limits per project.
+sources:
+  - https://contentsquare.com/pricing/
+  - https://help.hotjar.com/hc/en-us/articles/360003321377
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Insights API
+    scope: site
+    metric: requests_per_minute
+    limit: 60
+    timeFrame: minute
+  - name: Bulk export
+    scope: site
+    metric: concurrent
+    limit: 1

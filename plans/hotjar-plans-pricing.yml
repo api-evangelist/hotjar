@@ -1,0 +1,161 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Hotjar (Contentsquare)
+providerId: hotjar
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Heatmaps
+  - Session Replay
+  - Surveys
+  - Digital Experience
+description: 'Hotjar (now Contentsquare) tiers: Free / Growth / Pro / Enterprise. Migrating from legacy
+  Observe/Ask product split.'
+sources:
+  - https://contentsquare.com/pricing/
+plans:
+  - id: hotjar-free
+    name: Free (Contentsquare)
+    type: freemium
+    description: $0; 5,000 monthly sessions on new platform.
+    entries:
+      - label: Monthly sessions
+        name: sessions
+        type: quota
+        metric: session
+        limit: 5000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 5K monthly sessions (significant increase from legacy 35/day)
+      - name: Heatmaps
+      - name: Session replay
+      - name: Surveys (limited)
+  - id: hotjar-growth
+    name: Growth
+    type: paid
+    description: $49/month annual ($588/year invoice).
+    entries:
+      - label: Monthly (annual)
+        name: monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '49.00'
+        userMultiplied: false
+      - label: Annual invoice
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '588.00'
+        userMultiplied: false
+    elements:
+      - name: More sessions
+      - name: Surveys + feedback
+      - name: Forms tracking
+  - id: hotjar-observe-plus
+    name: (Legacy) Observe Plus
+    type: paid
+    description: $32/month; 100 daily sessions.
+    entries:
+      - label: Monthly
+        name: monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '32.00'
+        userMultiplied: false
+      - label: Daily sessions
+        name: sessions_day
+        type: quota
+        metric: session
+        limit: 100
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Heatmaps + recordings
+      - name: 100 daily sessions
+  - id: hotjar-observe-business
+    name: (Legacy) Observe Business
+    type: paid
+    description: $80/month; 500 daily sessions.
+    entries:
+      - label: Monthly
+        name: monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '80.00'
+        userMultiplied: false
+      - label: Daily sessions
+        name: sessions_day
+        type: quota
+        metric: session
+        limit: 500
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Heatmaps + recordings
+      - name: 500 daily sessions
+  - id: hotjar-observe-scale
+    name: (Legacy) Observe Scale
+    type: paid
+    description: $171/month; 500+ daily sessions.
+    entries:
+      - label: Monthly
+        name: monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '171.00'
+        userMultiplied: false
+    elements:
+      - name: 500+ daily sessions
+      - name: Advanced filters
+  - id: hotjar-pro-enterprise
+    name: Pro / Enterprise
+    type: enterprise
+    description: Custom pricing.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Higher session volume
+      - name: Cross-product (Observe + Ask + Engage)
+      - name: Single sign-on
+      - name: Dedicated support
