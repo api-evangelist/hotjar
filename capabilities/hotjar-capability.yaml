@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hotjar REST API
+  description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to
+    export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external
+    tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based
+    pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
+  tags:
+  - Hotjar
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: hotjar
+    baseUri: https://api.hotjar.io/v1
+    description: Hotjar REST API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{HOTJAR_TOKEN}}'
+    resources:
+    - name: oauth-token
+      path: /oauth/token
+      operations:
+      - name: createoauthtoken
+        method: POST
+        description: Obtain an OAuth access token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sites-site-id-surveys
+      path: /sites/{site_id}/surveys
+      operations:
+      - name: listsurveys
+        method: GET
+        description: List surveys for a site
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sites-site-id-surveys-survey-id
+      path: /sites/{site_id}/surveys/{survey_id}
+      operations:
+      - name: getsurvey
+        method: GET
+        description: Get a specific survey
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sites-site-id-surveys-survey-id-responses
+      path: /sites/{site_id}/surveys/{survey_id}/responses
+      operations:
+      - name: listsurveyresponses
+        method: GET
+        description: List survey responses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-organization-id-user-lookup
+      path: /organizations/{organization_id}/user-lookup
+      operations:
+      - name: userlookup
+        method: POST
+        description: Look up or delete user data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: hotjar-rest
+    description: REST adapter for Hotjar REST API.
+    resources:
+    - path: /oauth/token
+      name: createoauthtoken
+      operations:
+      - method: POST
+        name: createoauthtoken
+        description: Obtain an OAuth access token
+        call: hotjar.createoauthtoken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /sites/{site_id}/surveys
+      name: listsurveys
+      operations:
+      - method: GET
+        name: listsurveys
+        description: List surveys for a site
+        call: hotjar.listsurveys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /sites/{site_id}/surveys/{survey_id}
+      name: getsurvey
+      operations:
+      - method: GET
+        name: getsurvey
+        description: Get a specific survey
+        call: hotjar.getsurvey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /sites/{site_id}/surveys/{survey_id}/responses
+      name: listsurveyresponses
+      operations:
+      - method: GET
+        name: listsurveyresponses
+        description: List survey responses
+        call: hotjar.listsurveyresponses
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /organizations/{organization_id}/user-lookup
+      name: userlookup
+      operations:
+      - method: POST
+        name: userlookup
+        description: Look up or delete user data
+        call: hotjar.userlookup
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: hotjar-mcp
+    transport: http
+    description: MCP adapter for Hotjar REST API for AI agent use.
+    tools:
+    - name: createoauthtoken
+      description: Obtain an OAuth access token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hotjar.createoauthtoken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsurveys
+      description: List surveys for a site
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hotjar.listsurveys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getsurvey
+      description: Get a specific survey
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hotjar.getsurvey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsurveyresponses
+      description: List survey responses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hotjar.listsurveyresponses
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: userlookup
+      description: Look up or delete user data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hotjar.userlookup
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    HOTJAR_TOKEN: HOTJAR_TOKEN
