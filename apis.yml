@@ -82,7 +82,7 @@ apis:
       and provides methods for all Hotjar client-side APIs including identify and event tracking.
 modified: '2026-05-04'
 common:
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/hotjar-context.jsonld
   - type: JSONSchema
     url: json-schema/hotjar-survey-schema.json
