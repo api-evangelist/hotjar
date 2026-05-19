@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hotjar REST API — Survey Responses
+  description: 'Hotjar REST API — Survey Responses. 1 operations. Lead operation: List survey responses. Self-contained Naftiko
+    capability covering one Hotjar business surface.'
+  tags:
+  - Hotjar
+  - Survey Responses
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HOTJAR_API_KEY: HOTJAR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-survey-responses
+    baseUri: https://api.hotjar.io/v1
+    description: Hotjar REST API — Survey Responses business capability. Self-contained, no shared references.
+    resources:
+    - name: sites-site_id-surveys-survey_id-responses
+      path: /sites/{site_id}/surveys/{survey_id}/responses
+      operations:
+      - name: listsurveyresponses
+        method: GET
+        description: List survey responses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.HOTJAR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-survey-responses-rest
+    port: 8080
+    description: REST adapter for Hotjar REST API — Survey Responses. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/sites/{site-id}/surveys/{survey-id}/responses
+      name: sites-site-id-surveys-survey-id-responses
+      description: REST surface for sites-site_id-surveys-survey_id-responses.
+      operations:
+      - method: GET
+        name: listsurveyresponses
+        description: List survey responses
+        call: rest-survey-responses.listsurveyresponses
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-survey-responses-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hotjar REST API — Survey Responses. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-survey-responses
+      description: List survey responses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-survey-responses.listsurveyresponses
+      outputParameters:
+      - type: object
+        mapping: $.

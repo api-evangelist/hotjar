@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hotjar REST API — User Lookup
+  description: 'Hotjar REST API — User Lookup. 1 operations. Lead operation: Look up or delete user data. Self-contained Naftiko
+    capability covering one Hotjar business surface.'
+  tags:
+  - Hotjar
+  - User Lookup
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HOTJAR_API_KEY: HOTJAR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-user-lookup
+    baseUri: https://api.hotjar.io/v1
+    description: Hotjar REST API — User Lookup business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organization_id-user-lookup
+      path: /organizations/{organization_id}/user-lookup
+      operations:
+      - name: userlookup
+        method: POST
+        description: Look up or delete user data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.HOTJAR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-user-lookup-rest
+    port: 8080
+    description: REST adapter for Hotjar REST API — User Lookup. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations/{organization-id}/user-lookup
+      name: organizations-organization-id-user-lookup
+      description: REST surface for organizations-organization_id-user-lookup.
+      operations:
+      - method: POST
+        name: userlookup
+        description: Look up or delete user data
+        call: rest-user-lookup.userlookup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-user-lookup-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hotjar REST API — User Lookup. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: look-up-delete-user-data
+      description: Look up or delete user data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-user-lookup.userlookup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
