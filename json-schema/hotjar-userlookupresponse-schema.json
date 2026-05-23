@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserLookupResponse",
+  "title": "UserLookupResponse",
+  "type": "object",
+  "description": "The result of a user lookup or deletion request.",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The status of the lookup or deletion request."
+    },
+    "message": {
+      "type": "string",
+      "description": "A human-readable message describing the result."
+    }
+  }
+}

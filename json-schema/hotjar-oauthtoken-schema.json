@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OAuthToken",
+  "title": "OAuthToken",
+  "type": "object",
+  "description": "An OAuth 2.0 access token response returned after successful client credentials authentication.",
+  "properties": {
+    "access_token": {
+      "type": "string",
+      "description": "The access token to use in the Authorization header of API requests."
+    },
+    "token_type": {
+      "type": "string",
+      "description": "The type of token issued. Always bearer.",
+      "enum": [
+        "bearer"
+      ]
+    },
+    "expires_in": {
+      "type": "integer",
+      "description": "The number of seconds until the access token expires."
+    }
+  }
+}

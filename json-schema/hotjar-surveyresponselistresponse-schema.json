@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SurveyResponseListResponse",
+  "title": "SurveyResponseListResponse",
+  "type": "object",
+  "description": "A paginated list of survey responses with cursor-based pagination support.",
+  "properties": {
+    "results": {
+      "type": "array",
+      "description": "The list of survey responses returned in this page.",
+      "items": {
+        "$ref": "#/components/schemas/SurveyResponse"
+      }
+    },
+    "next_cursor": {
+      "type": "string",
+      "nullable": true,
+      "description": "The cursor value to use for fetching the next page. Null when there are no more results."
+    }
+  }
+}

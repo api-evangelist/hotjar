@@ -1,0 +1,13 @@
+name: Hotjar Domain Vocabulary
+provider: Hotjar
+providerId: hotjar
+description: Tag-derived vocabulary for the Hotjar API surface; sourced from openapi/ tags.
+terms:
+- term: Authentication
+  description: OAuth 2.0 client credentials authentication endpoints for obtaining access tokens.
+- term: Survey Responses
+  description: Endpoints for exporting and listing survey response data with cursor-based pagination.
+- term: Surveys
+  description: Endpoints for listing surveys and retrieving survey details for a specific site.
+- term: User Lookup
+  description: Endpoints for looking up user data and submitting deletion requests for GDPR compliance.

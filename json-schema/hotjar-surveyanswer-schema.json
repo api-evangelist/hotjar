@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SurveyAnswer",
+  "title": "SurveyAnswer",
+  "type": "object",
+  "description": "An individual answer to a survey question within a response.",
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "description": "The unique identifier of the question being answered."
+    },
+    "answer": {
+      "type": "string",
+      "description": "The text of the answer provided by the respondent."
+    }
+  }
+}

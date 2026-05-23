@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SurveyResponse",
+  "title": "SurveyResponse",
+  "type": "object",
+  "description": "A single response to a Hotjar survey, containing the answers provided by a respondent.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the survey response."
+    },
+    "answers": {
+      "type": "array",
+      "description": "The list of answers provided in this response.",
+      "items": {
+        "$ref": "#/components/schemas/SurveyAnswer"
+      }
+    },
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional comment provided by the respondent."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with this survey response.",
+      "items": {
+        "$ref": "#/components/schemas/SurveyResponseTag"
+      }
+    }
+  }
+}

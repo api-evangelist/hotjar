@@ -1,0 +1,123 @@
+{
+  "provider": "Hotjar",
+  "providerId": "hotjar",
+  "kind": "json-structure",
+  "description": "Structural overview of the Hotjar API surface; extracted from openapi/.",
+  "schemaCount": 11,
+  "operationCount": 5,
+  "schemas": [
+    {
+      "name": "OAuthToken",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Survey",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "SurveyQuestion",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "SurveyResponse",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SurveyAnswer",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SurveyResponseTag",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "SurveyListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SurveyResponseListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "UserLookupRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "UserLookupResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "operationId": "createOAuthToken",
+      "summary": "Obtain an OAuth access token",
+      "tags": [
+        "Authentication"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/sites/{site_id}/surveys",
+      "operationId": "listSurveys",
+      "summary": "List surveys for a site",
+      "tags": [
+        "Surveys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/sites/{site_id}/surveys/{survey_id}",
+      "operationId": "getSurvey",
+      "summary": "Get a specific survey",
+      "tags": [
+        "Surveys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/sites/{site_id}/surveys/{survey_id}/responses",
+      "operationId": "listSurveyResponses",
+      "summary": "List survey responses",
+      "tags": [
+        "Survey Responses"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/organizations/{organization_id}/user-lookup",
+      "operationId": "userLookup",
+      "summary": "Look up or delete user data",
+      "tags": [
+        "User Lookup"
+      ]
+    }
+  ]
+}
