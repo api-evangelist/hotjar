@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hotjar REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain an OAuth access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hotjar.io/v1/oauth/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Obtains an OAuth 2.0 access token using the client credentials grant type. The request must be encoded as application/x-www-form-urlencoded and include the client_id, client_secret, and grant_type parameters. The returned access token should be included as a Bearer token in the Authorization header of subsequent API requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Surveys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List surveys for a site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "with_questions",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether question information should be included in the response. Defaults to false."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page. Maximum value is 100."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of surveys for a specific site. Supports cursor-based pagination and optionally includes question details in the response. The site_id can be found in the Sites and Organizations page in your Hotjar account."
+        },
+        {
+          "info": {
+            "name": "Get a specific survey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys/:survey_id",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "survey_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the survey."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific survey for a site, including its questions, configuration, and status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Survey Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List survey responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys/:survey_id/responses",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "survey_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the survey."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page. Maximum value is 100."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of responses for a specific survey. Responses are sorted by creation date in descending order, with the most recent responses returned first. Supports cursor-based pagination with a maximum of 100 responses per page. Available on Ask Scale plans."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up or delete user data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hotjar.io/v1/organizations/:organization_id/user-lookup",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Looks up user data across sites in an organization and optionally deletes all associated data. This endpoint supports GDPR compliance by enabling automated user data lookup and deletion requests. At least one of data_subject_email or data_subject_site_id_to_user_id_map must be provided. Available on Observe and Ask Scale plans."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
