@@ -9,7 +9,7 @@ apis:
       - Heatmaps
       - Surveys
       - User Feedback
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.hotjar.com
     humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
     properties:
@@ -31,7 +31,7 @@ apis:
       - Recordings
       - Surveys
       - Tracking
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
     properties:
@@ -50,7 +50,7 @@ apis:
       - Personalization
       - Segmentation
       - Users
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
     properties:
@@ -69,7 +69,7 @@ apis:
       - JavaScript
       - SDK
       - Tracking
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://github.com/hotjar/hotjar-js
     properties:
