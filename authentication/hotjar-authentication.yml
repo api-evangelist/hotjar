@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/hotjar-rest-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Bearer token obtained from the OAuth token endpoint using client credentials
+    grant.
+  sources:
+  - openapi/hotjar-rest-api-openapi.yml

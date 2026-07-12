@@ -83,6 +83,10 @@ apis:
       including identify and event tracking.
 modified: '2026-05-19'
 common:
+  - type: DomainSecurity
+    url: security/hotjar-domain-security.yml
+  - type: Authentication
+    url: authentication/hotjar-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/hotjar
   - type: JSONLD
