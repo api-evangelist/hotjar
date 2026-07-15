@@ -83,6 +83,8 @@ apis:
       including identify and event tracking.
 modified: '2026-05-19'
 common:
+  - type: AgenticAccess
+    url: agentic-access/hotjar-agentic-access.yml
   - type: DomainSecurity
     url: security/hotjar-domain-security.yml
   - type: Authentication
