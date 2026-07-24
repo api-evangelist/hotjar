@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Hotjar REST Authentication User Lookup API
+  description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
+  version: '1.0'
+  contact:
+    name: Hotjar Support
+    url: https://help.hotjar.com
+  termsOfService: https://www.hotjar.com/legal/policies/terms-of-service/
+servers:
+- url: https://api.hotjar.io/v1
+  description: Hotjar Production API Server
+security:
+- bearerAuth: []
+tags:
+- name: User Lookup
+  description: Endpoints for looking up user data and submitting deletion requests for GDPR compliance.
+paths:
+  /organizations/{organization_id}/user-lookup:
+    post:
+      operationId: userLookup
+      summary: Look up or delete user data
+      description: Looks up user data across sites in an organization and optionally deletes all associated data. This endpoint supports GDPR compliance by enabling automated user data lookup and deletion requests. At least one of data_subject_email or data_subject_site_id_to_user_id_map must be provided. Available on Observe and Ask Scale plans.
+      tags:
+      - User Lookup
+      parameters:
+      - $ref: '#/components/parameters/OrganizationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLookupRequest'
+      responses:
+        '200':
+          description: Successfully processed user lookup or deletion request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLookupResponse'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Organization not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    UserLookupResponse:
+      type: object
+      description: The result of a user lookup or deletion request.
+      properties:
+        status:
+          type: string
+          description: The status of the lookup or deletion request.
+        message:
+          type: string
+          description: A human-readable message describing the result.
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    UserLookupRequest:
+      type: object
+      description: A request to look up or delete user data across sites in an organization. At least one of data_subject_email or data_subject_site_id_to_user_id_map must be provided.
+      properties:
+        data_subject_email:
+          type: string
+          format: email
+          description: The email address of the data subject to look up.
+        data_subject_site_id_to_user_id_map:
+          type: object
+          description: A map of site IDs to user IDs on your site, used when user attributes have been sent via the Identify API.
+          additionalProperties:
+            type: string
+        delete_all_hits:
+          type: boolean
+          description: Whether to immediately delete all found data for the user. Set to true to submit a deletion request.
+          default: false
+  parameters:
+    OrganizationId:
+      name: organization_id
+      in: path
+      required: true
+      description: The unique identifier for the organization.
+      schema:
+        type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token obtained from the OAuth token endpoint using client credentials grant.
+externalDocs:
+  description: Hotjar API Reference
+  url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference

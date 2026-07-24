@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: Hotjar REST Authentication API
+  description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
+  version: '1.0'
+  contact:
+    name: Hotjar Support
+    url: https://help.hotjar.com
+  termsOfService: https://www.hotjar.com/legal/policies/terms-of-service/
+servers:
+- url: https://api.hotjar.io/v1
+  description: Hotjar Production API Server
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: OAuth 2.0 client credentials authentication endpoints for obtaining access tokens.
+paths:
+  /oauth/token:
+    post:
+      operationId: createOAuthToken
+      summary: Obtain an OAuth access token
+      description: Obtains an OAuth 2.0 access token using the client credentials grant type. The request must be encoded as application/x-www-form-urlencoded and include the client_id, client_secret, and grant_type parameters. The returned access token should be included as a Bearer token in the Authorization header of subsequent API requests.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  description: The OAuth 2.0 grant type. Must be set to client_credentials.
+                client_id:
+                  type: string
+                  description: The client ID from your Hotjar API key pair.
+                client_secret:
+                  type: string
+                  description: The client secret from your Hotjar API key pair.
+      responses:
+        '200':
+          description: Successfully obtained access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthToken'
+        '401':
+          description: Invalid client credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    OAuthToken:
+      type: object
+      description: An OAuth 2.0 access token response returned after successful client credentials authentication.
+      properties:
+        access_token:
+          type: string
+          description: The access token to use in the Authorization header of API requests.
+        token_type:
+          type: string
+          description: The type of token issued. Always bearer.
+          enum:
+          - bearer
+        expires_in:
+          type: integer
+          description: The number of seconds until the access token expires.
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token obtained from the OAuth token endpoint using client credentials grant.
+externalDocs:
+  description: Hotjar API Reference
+  url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference

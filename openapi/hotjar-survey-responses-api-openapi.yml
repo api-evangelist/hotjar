@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Hotjar REST Authentication Survey Responses API
+  description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
+  version: '1.0'
+  contact:
+    name: Hotjar Support
+    url: https://help.hotjar.com
+  termsOfService: https://www.hotjar.com/legal/policies/terms-of-service/
+servers:
+- url: https://api.hotjar.io/v1
+  description: Hotjar Production API Server
+security:
+- bearerAuth: []
+tags:
+- name: Survey Responses
+  description: Endpoints for exporting and listing survey response data with cursor-based pagination.
+paths:
+  /sites/{site_id}/surveys/{survey_id}/responses:
+    get:
+      operationId: listSurveyResponses
+      summary: List survey responses
+      description: Returns a paginated list of responses for a specific survey. Responses are sorted by creation date in descending order, with the most recent responses returned first. Supports cursor-based pagination with a maximum of 100 responses per page. Available on Ask Scale plans.
+      tags:
+      - Survey Responses
+      parameters:
+      - $ref: '#/components/parameters/SiteId'
+      - $ref: '#/components/parameters/SurveyId'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Successfully retrieved list of survey responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyResponseListResponse'
+        '401':
+          description: Missing or invalid authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions for the requested resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Survey or site not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    SurveyResponseTag:
+      type: object
+      description: A tag associated with a survey response for categorization and filtering.
+      properties:
+        name:
+          type: string
+          description: The name of the tag.
+    SurveyResponse:
+      type: object
+      description: A single response to a Hotjar survey, containing the answers provided by a respondent.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the survey response.
+        answers:
+          type: array
+          description: The list of answers provided in this response.
+          items:
+            $ref: '#/components/schemas/SurveyAnswer'
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment provided by the respondent.
+        tags:
+          type: array
+          description: Tags associated with this survey response.
+          items:
+            $ref: '#/components/schemas/SurveyResponseTag'
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    SurveyResponseListResponse:
+      type: object
+      description: A paginated list of survey responses with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: The list of survey responses returned in this page.
+          items:
+            $ref: '#/components/schemas/SurveyResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
+    SurveyAnswer:
+      type: object
+      description: An individual answer to a survey question within a response.
+      properties:
+        question_id:
+          type: string
+          description: The unique identifier of the question being answered.
+        answer:
+          type: string
+          description: The text of the answer provided by the respondent.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token obtained from the OAuth token endpoint using client credentials grant.
+externalDocs:
+  description: Hotjar API Reference
+  url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
