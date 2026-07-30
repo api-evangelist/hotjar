@@ -1,86 +1,129 @@
 aid: hotjar
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hotjar.png
 url: https://raw.githubusercontent.com/api-evangelist/hotjar/refs/heads/main/apis.yml
 apis:
-  - aid: hotjar:rest-api
-    name: Hotjar REST API
-    tags:
-      - Analytics
-      - Behavior
-      - Heatmaps
-      - Surveys
-      - User Feedback
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.hotjar.com
-    humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
-    properties:
-      - url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
-        type: Documentation
-      - url: openapi/hotjar-rest-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export
-      survey responses, automate user lookup and deletion requests, and integrate Hotjar data into external tools and
-      workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based
-      pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
-  - aid: hotjar:events-api
-    name: Hotjar Events API
-    tags:
-      - Analytics
-      - Events
-      - Heatmaps
-      - Recordings
-      - Surveys
-      - Tracking
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.example.com
-    humanURL: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
-    properties:
-      - url: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
-        type: Documentation
-    description: >-
-      The Hotjar Events API is a client-side JavaScript API that allows developers to send custom events to Hotjar when
-      specific actions take place on a website. These events can be used to filter collected Recordings and Heatmap
-      data, trigger session capture, and target Surveys to appear based on user behavior. Events are sent using the
-      Hotjar tracking code and are available on all pages where the tracking snippet is installed.
-  - aid: hotjar:identify-api
-    name: Hotjar Identify API
-    tags:
-      - Analytics
-      - Attributes
-      - Personalization
-      - Segmentation
-      - Users
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.example.com
-    humanURL: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
-    properties:
-      - url: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
-        type: Documentation
-    description: >-
-      The Hotjar Identify API is a client-side JavaScript API that allows developers to pass user data to Hotjar, saving
-      it as User Attributes. These attributes enable advanced filtering and segmentation of Hotjar data such as
-      Recordings, Heatmaps, and Surveys. The Identify API must be called before the Events API in the execution order.
-      It is used via the Hotjar tracking code on pages where the JavaScript snippet is installed.
-  - aid: hotjar:javascript-sdk
-    name: Hotjar JavaScript SDK
-    tags:
-      - Analytics
-      - Browser
-      - JavaScript
-      - SDK
-      - Tracking
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.example.com
-    humanURL: https://github.com/hotjar/hotjar-js
-    properties:
-      - url: https://github.com/hotjar/hotjar-js
-        type: Documentation
-    description: >-
-      The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic interface for
-      integrating Hotjar directly into JavaScript applications. It allows developers to initialize Hotjar with a site
-      ID, identify users, and send custom events without manually embedding the tracking script. The SDK supports modern
-      JavaScript frameworks including React, Vue, and Angular, and provides methods for all Hotjar client-side APIs
-      including identify and event tracking.
+- aid: hotjar:events-api
+  name: Hotjar Events API
+  tags:
+  - Analytics
+  - Events
+  - Heatmaps
+  - Recordings
+  - Surveys
+  - Tracking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.example.com
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
+  properties:
+  - url: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
+    type: Documentation
+  description: >-
+    The Hotjar Events API is a client-side JavaScript API that allows developers to send custom events
+    to Hotjar when specific actions take place on a website. These events can be used to filter collected
+    Recordings and Heatmap data, trigger session capture, and target Surveys to appear based on user behavior.
+    Events are sent using the Hotjar tracking code and are available on all pages where the tracking snippet
+    is installed.
+- aid: hotjar:identify-api
+  name: Hotjar Identify API
+  tags:
+  - Analytics
+  - Attributes
+  - Personalization
+  - Segmentation
+  - Users
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.example.com
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
+  properties:
+  - url: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
+    type: Documentation
+  description: >-
+    The Hotjar Identify API is a client-side JavaScript API that allows developers to pass user data to
+    Hotjar, saving it as User Attributes. These attributes enable advanced filtering and segmentation
+    of Hotjar data such as Recordings, Heatmaps, and Surveys. The Identify API must be called before the
+    Events API in the execution order. It is used via the Hotjar tracking code on pages where the JavaScript
+    snippet is installed.
+- aid: hotjar:javascript-sdk
+  name: Hotjar JavaScript SDK
+  tags:
+  - Analytics
+  - Browser
+  - JavaScript
+  - SDK
+  - Tracking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.example.com
+  humanURL: https://github.com/hotjar/hotjar-js
+  properties:
+  - url: https://github.com/hotjar/hotjar-js
+    type: Documentation
+  description: >-
+    The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic interface
+    for integrating Hotjar directly into JavaScript applications. It allows developers to initialize Hotjar
+    with a site ID, identify users, and send custom events without manually embedding the tracking script.
+    The SDK supports modern JavaScript frameworks including React, Vue, and Angular, and provides methods
+    for all Hotjar client-side APIs including identify and event tracking.
+- aid: hotjar:hotjar-authentication-api
+  name: hotjar Authentication API
+  description: OAuth 2.0 client credentials authentication endpoints for obtaining access tokens.
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+  baseURL: https://api.hotjar.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/hotjar-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+- aid: hotjar:hotjar-survey-responses-api
+  name: hotjar Survey Responses API
+  description: Endpoints for exporting and listing survey response data with cursor-based pagination.
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+  baseURL: https://api.hotjar.com
+  tags:
+  - Survey Responses
+  properties:
+  - type: OpenAPI
+    url: openapi/hotjar-survey-responses-api-openapi.yml
+  - type: Documentation
+    url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+- aid: hotjar:hotjar-surveys-api
+  name: hotjar Surveys API
+  description: Endpoints for listing surveys and retrieving survey details for a specific site.
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+  baseURL: https://api.hotjar.com
+  tags:
+  - Surveys
+  properties:
+  - type: OpenAPI
+    url: openapi/hotjar-surveys-api-openapi.yml
+  - type: Documentation
+    url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+- aid: hotjar:hotjar-user-lookup-api
+  name: hotjar User Lookup API
+  description: Endpoints for looking up user data and submitting deletion requests for GDPR compliance.
+  humanURL: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
+  baseURL: https://api.hotjar.com
+  tags:
+  - User Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/hotjar-user-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
 modified: '2026-05-19'
 common:
   - type: AgenticAccess
