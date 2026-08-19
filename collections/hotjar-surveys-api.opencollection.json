@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hotjar REST Authentication Surveys API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Surveys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List surveys for a site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "with_questions",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether question information should be included in the response. Defaults to false."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page. Maximum value is 100."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of surveys for a specific site. Supports cursor-based pagination and optionally includes question details in the response. The site_id can be found in the Sites and Organizations page in your Hotjar account."
+        },
+        {
+          "info": {
+            "name": "Get a specific survey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys/:survey_id",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "survey_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the survey."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific survey for a site, including its questions, configuration, and status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

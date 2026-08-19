@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hotjar REST Authentication User Lookup API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up or delete user data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hotjar.io/v1/organizations/:organization_id/user-lookup",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Looks up user data across sites in an organization and optionally deletes all associated data. This endpoint supports GDPR compliance by enabling automated user data lookup and deletion requests. At least one of data_subject_email or data_subject_site_id_to_user_id_map must be provided. Available on Observe and Ask Scale plans."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hotjar REST Authentication Survey Responses API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Survey Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List survey responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hotjar.io/v1/sites/:site_id/surveys/:survey_id/responses",
+            "params": [
+              {
+                "name": "site_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+              },
+              {
+                "name": "survey_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the survey."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page. Maximum value is 100."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of responses for a specific survey. Responses are sorted by creation date in descending order, with the most recent responses returned first. Supports cursor-based pagination with a maximum of 100 responses per page. Available on Ask Scale plans."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

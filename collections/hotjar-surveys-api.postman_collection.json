@@ -1,0 +1,666 @@
+{
+  "item": [
+    {
+      "id": "4387c61d-b85e-46f5-968f-9f60f6fe4b8d",
+      "name": "Surveys",
+      "description": {
+        "content": "Endpoints for listing surveys and retrieving survey details for a specific site.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a504f64e-c709-44fc-af6c-123945fc3301",
+          "name": "List surveys for a site",
+          "request": {
+            "name": "List surveys for a site",
+            "description": {
+              "content": "Returns a paginated list of surveys for a specific site. Supports cursor-based pagination and optionally includes question details in the response. The site_id can be found in the Sites and Organizations page in your Hotjar account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sites",
+                ":site_id",
+                "surveys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with_questions",
+                  "value": "false",
+                  "description": "Flag indicating whether question information should be included in the response. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to return per page. Maximum value is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "site_id",
+                  "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff5ed532-283f-41ba-8545-978ccb450274",
+              "name": "Successfully retrieved list of surveys",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_questions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": 8186,\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"is_enabled\": false,\n      \"created_time\": \"2025-01-06T22:17:48.516Z\",\n      \"url\": \"string\",\n      \"responses_url\": \"string\",\n      \"sentiment_analysis_enabled\": true,\n      \"questions\": [\n        {\n          \"id\": 7840,\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"is_required\": true,\n          \"choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"labels\": {},\n          \"image_url\": \"string\"\n        },\n        {\n          \"id\": 2724,\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"is_required\": true,\n          \"choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"labels\": {},\n          \"image_url\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 300,\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"is_enabled\": true,\n      \"created_time\": \"1988-07-03T23:32:41.104Z\",\n      \"url\": \"string\",\n      \"responses_url\": \"string\",\n      \"sentiment_analysis_enabled\": true,\n      \"questions\": [\n        {\n          \"id\": 6859,\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"is_required\": true,\n          \"choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"labels\": {},\n          \"image_url\": \"string\"\n        },\n        {\n          \"id\": 1672,\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"is_required\": true,\n          \"choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"labels\": {},\n          \"image_url\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd0dbd0e-ce1c-46e7-91aa-461893f6cd8c",
+              "name": "Missing or invalid authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_questions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "049e4a79-5097-449a-879d-0c3596febc21",
+              "name": "Insufficient permissions for the requested resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_questions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "397761c2-5a9c-46ce-a2a4-6ac096cc84b0",
+              "name": "Site not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_questions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e63fbd82-bc4d-4d06-bb63-70f5734a89e5",
+          "name": "Get a specific survey",
+          "request": {
+            "name": "Get a specific survey",
+            "description": {
+              "content": "Returns the details of a specific survey for a site, including its questions, configuration, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sites",
+                ":site_id",
+                "surveys",
+                ":survey_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "site_id",
+                  "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "survey_id",
+                  "description": "(Required) The unique identifier for the survey."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecb95676-1704-43f9-9cdd-57177209a7ef",
+              "name": "Successfully retrieved survey details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys",
+                    ":survey_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "survey_id",
+                      "description": "(Required) The unique identifier for the survey."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4439,\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"is_enabled\": true,\n  \"created_time\": \"1947-12-19T09:54:29.132Z\",\n  \"url\": \"string\",\n  \"responses_url\": \"string\",\n  \"sentiment_analysis_enabled\": false,\n  \"questions\": [\n    {\n      \"id\": 1992,\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"is_required\": true,\n      \"choices\": [\n        \"string\",\n        \"string\"\n      ],\n      \"labels\": {},\n      \"image_url\": \"string\"\n    },\n    {\n      \"id\": 5453,\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"is_required\": false,\n      \"choices\": [\n        \"string\",\n        \"string\"\n      ],\n      \"labels\": {},\n      \"image_url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c1b4fdf-35da-4703-961b-03816c5b3350",
+              "name": "Missing or invalid authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys",
+                    ":survey_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "survey_id",
+                      "description": "(Required) The unique identifier for the survey."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3a43c4d-8c32-46b1-9529-9fcb01006215",
+              "name": "Insufficient permissions for the requested resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys",
+                    ":survey_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "survey_id",
+                      "description": "(Required) The unique identifier for the survey."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c130cf-b0c3-4d99-95c1-5a659d229649",
+              "name": "Survey or site not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sites",
+                    ":site_id",
+                    "surveys",
+                    ":survey_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "site_id",
+                      "description": "(Required) The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "survey_id",
+                      "description": "(Required) The unique identifier for the survey."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hotjar.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5cfbf471-406a-4d8e-94cd-76e589f9eccf",
+    "name": "Hotjar REST Authentication Surveys API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.\n\nContact Support:\n Name: Hotjar Support",
+      "type": "text/plain"
+    }
+  }
+}
