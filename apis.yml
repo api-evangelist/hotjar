@@ -20,6 +20,13 @@ apis:
   name: Hotjar Events API
   tags:
   - Analytics
+  - Event
+  - Heatmaps
+  - Recordings
+  - Surveys
+  - Tracking
+  tags_raw:
+  - Analytics
   - Events
   - Heatmaps
   - Recordings
@@ -40,6 +47,12 @@ apis:
 - aid: hotjar:identify-api
   name: Hotjar Identify API
   tags:
+  - Analytics
+  - Attributes
+  - Personalization
+  - Segmentation
+  - User
+  tags_raw:
   - Analytics
   - Attributes
   - Personalization
