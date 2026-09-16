@@ -150,6 +150,8 @@ apis:
     url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
 modified: '2026-09-16'
 common:
+- type: Website
+  url: https://hotjar.com
 - type: AgenticAccess
   url: agentic-access/hotjar-agentic-access.yml
 - type: DomainSecurity
