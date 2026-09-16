@@ -51,12 +51,11 @@ apis:
   properties:
   - url: https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference
     type: Documentation
-  description: >-
-    The Hotjar Events API is a client-side JavaScript API that allows developers to send custom events
-    to Hotjar when specific actions take place on a website. These events can be used to filter collected
-    Recordings and Heatmap data, trigger session capture, and target Surveys to appear based on user behavior.
-    Events are sent using the Hotjar tracking code and are available on all pages where the tracking snippet
-    is installed.
+  description: The Hotjar Events API is a client-side JavaScript API that allows developers to send custom
+    events to Hotjar when specific actions take place on a website. These events can be used to filter
+    collected Recordings and Heatmap data, trigger session capture, and target Surveys to appear based
+    on user behavior. Events are sent using the Hotjar tracking code and are available on all pages where
+    the tracking snippet is installed.
 - aid: hotjar:identify-api
   name: Hotjar Identify API
   tags:
@@ -77,12 +76,11 @@ apis:
   properties:
   - url: https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference
     type: Documentation
-  description: >-
-    The Hotjar Identify API is a client-side JavaScript API that allows developers to pass user data to
-    Hotjar, saving it as User Attributes. These attributes enable advanced filtering and segmentation
-    of Hotjar data such as Recordings, Heatmaps, and Surveys. The Identify API must be called before the
-    Events API in the execution order. It is used via the Hotjar tracking code on pages where the JavaScript
-    snippet is installed.
+  description: The Hotjar Identify API is a client-side JavaScript API that allows developers to pass
+    user data to Hotjar, saving it as User Attributes. These attributes enable advanced filtering and
+    segmentation of Hotjar data such as Recordings, Heatmaps, and Surveys. The Identify API must be called
+    before the Events API in the execution order. It is used via the Hotjar tracking code on pages where
+    the JavaScript snippet is installed.
 - aid: hotjar:javascript-sdk
   name: Hotjar JavaScript SDK
   tags:
@@ -97,12 +95,11 @@ apis:
   properties:
   - url: https://github.com/hotjar/hotjar-js
     type: Documentation
-  description: >-
-    The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic interface
-    for integrating Hotjar directly into JavaScript applications. It allows developers to initialize Hotjar
-    with a site ID, identify users, and send custom events without manually embedding the tracking script.
-    The SDK supports modern JavaScript frameworks including React, Vue, and Angular, and provides methods
-    for all Hotjar client-side APIs including identify and event tracking.
+  description: The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic
+    interface for integrating Hotjar directly into JavaScript applications. It allows developers to initialize
+    Hotjar with a site ID, identify users, and send custom events without manually embedding the tracking
+    script. The SDK supports modern JavaScript frameworks including React, Vue, and Angular, and provides
+    methods for all Hotjar client-side APIs including identify and event tracking.
 - aid: hotjar:hotjar-authentication-api
   name: hotjar Authentication API
   description: OAuth 2.0 client credentials authentication endpoints for obtaining access tokens.
@@ -151,45 +148,50 @@ apis:
     url: openapi/hotjar-user-lookup-api-openapi.yml
   - type: Documentation
     url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
-modified: '2026-05-19'
+modified: '2026-09-16'
 common:
-  - type: AgenticAccess
-    url: agentic-access/hotjar-agentic-access.yml
-  - type: DomainSecurity
-    url: security/hotjar-domain-security.yml
-  - type: Authentication
-    url: authentication/hotjar-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/hotjar
-  - type: JSONLD
-    url: json-ld/hotjar-context.jsonld
-  - type: JSONSchema
-    url: json-schema/hotjar-survey-schema.json
-  - type: JSONSchema
-    url: json-schema/hotjar-survey-response-schema.json
-  - type: JSONSchema
-    url: json-schema/hotjar-user-lookup-schema.json
-  - type: Features
-    data:
-      - 'Free: 5,000 monthly sessions on new Contentsquare platform'
-      - 'Growth: $49/month annual'
-      - Legacy Observe Plus $32/mo (100 daily sessions)
-      - Legacy Observe Business $80/mo (500 daily sessions)
-      - Legacy Observe Scale $171/mo
-      - 'Pro / Enterprise: custom pricing'
-      - Heatmaps (click, scroll, move)
-      - Session replay (anonymized)
-      - Surveys and feedback widgets
-      - Funnels and conversion tracking
-      - Engage product for moderated user interviews
-      - Insights API at insights.hotjar.com
-      - OAuth + API tokens
-      - Webhooks via Insights
-      - Privacy controls (PII masking, IP suppression)
-      - Migration to unified Contentsquare platform through 2026
-    sources:
-      - https://contentsquare.com/pricing/
-    updated: '2026-05-04'
-description: >-
-  Hotjar is a behavior analytics and user feedback platform that helps businesses understand how users interact with
-  their website through heatmaps, session recordings, surveys, and feedback widgets.
+- type: AgenticAccess
+  url: agentic-access/hotjar-agentic-access.yml
+- type: DomainSecurity
+  url: security/hotjar-domain-security.yml
+- type: Authentication
+  url: authentication/hotjar-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hotjar
+- type: JSONLD
+  url: json-ld/hotjar-context.jsonld
+- type: JSONSchema
+  url: json-schema/hotjar-survey-schema.json
+- type: JSONSchema
+  url: json-schema/hotjar-survey-response-schema.json
+- type: JSONSchema
+  url: json-schema/hotjar-user-lookup-schema.json
+- type: Features
+  data:
+  - 'Free: 5,000 monthly sessions on new Contentsquare platform'
+  - 'Growth: $49/month annual'
+  - Legacy Observe Plus $32/mo (100 daily sessions)
+  - Legacy Observe Business $80/mo (500 daily sessions)
+  - Legacy Observe Scale $171/mo
+  - 'Pro / Enterprise: custom pricing'
+  - Heatmaps (click, scroll, move)
+  - Session replay (anonymized)
+  - Surveys and feedback widgets
+  - Funnels and conversion tracking
+  - Engage product for moderated user interviews
+  - Insights API at insights.hotjar.com
+  - OAuth + API tokens
+  - Webhooks via Insights
+  - Privacy controls (PII masking, IP suppression)
+  - Migration to unified Contentsquare platform through 2026
+  sources:
+  - https://contentsquare.com/pricing/
+  updated: '2026-05-04'
+description: Hotjar is a behavior analytics and user feedback platform that helps businesses understand
+  how users interact with their website through heatmaps, session recordings, surveys, and feedback widgets.
+tags:
+- Analytics
+- Surveys
+- Tracking
+- Personalization
+- Segmentation
