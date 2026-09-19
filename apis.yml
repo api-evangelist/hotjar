@@ -35,7 +35,7 @@ apis:
   - Analytics
   - Event
   - Heatmaps
-  - Recordings
+  - Recording
   - Surveys
   - Tracking
   tags_raw:
