@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Hotjar REST Authentication Surveys API
+  title: Hotjar REST Surveys API
   description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
   version: '1.0'
   contact:
@@ -90,35 +90,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
-    SiteId:
-      name: site_id
-      in: path
-      required: true
-      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
-      schema:
-        type: integer
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
-    WithQuestions:
-      name: with_questions
-      in: query
-      required: false
-      description: Flag indicating whether question information should be included in the response. Defaults to false.
-      schema:
-        type: boolean
-        default: false
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
     Limit:
       name: limit
       in: query
@@ -128,7 +99,49 @@ components:
         type: integer
         minimum: 1
         maximum: 100
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
+    WithQuestions:
+      name: with_questions
+      in: query
+      required: false
+      description: Flag indicating whether question information should be included in the response. Defaults to false.
+      schema:
+        type: boolean
+        default: false
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
   schemas:
+    SurveyListResponse:
+      type: object
+      description: A paginated list of surveys with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: The list of surveys returned in this page.
+          items:
+            $ref: '#/components/schemas/Survey'
+        next_cursor:
+          type: string
+          nullable: true
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
     SurveyQuestion:
       type: object
       description: A question within a Hotjar survey, including its type, text, and available answer options.
@@ -159,19 +172,6 @@ components:
           type: string
           nullable: true
           description: URL of an image attached to the question. Null if no image is attached.
-    SurveyListResponse:
-      type: object
-      description: A paginated list of surveys with cursor-based pagination support.
-      properties:
-        results:
-          type: array
-          description: The list of surveys returned in this page.
-          items:
-            $ref: '#/components/schemas/Survey'
-        next_cursor:
-          type: string
-          nullable: true
-          description: The cursor value to use for fetching the next page. Null when there are no more results.
     Error:
       type: object
       description: An error response returned by the API when a request fails.

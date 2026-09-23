@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Hotjar REST Authentication Survey Responses API
+  title: Hotjar REST Survey Responses API
   description: The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, list surveys, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
   version: '1.0'
   contact:
@@ -55,13 +55,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
-    SiteId:
-      name: site_id
-      in: path
-      required: true
-      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
       schema:
         type: integer
+        minimum: 1
+        maximum: 100
     Cursor:
       name: cursor
       in: query
@@ -76,23 +78,14 @@ components:
       description: The unique identifier for the survey.
       schema:
         type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of items to return per page. Maximum value is 100.
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
       schema:
         type: integer
-        minimum: 1
-        maximum: 100
   schemas:
-    SurveyResponseTag:
-      type: object
-      description: A tag associated with a survey response for categorization and filtering.
-      properties:
-        name:
-          type: string
-          description: The name of the tag.
     SurveyResponse:
       type: object
       description: A single response to a Hotjar survey, containing the answers provided by a respondent.
@@ -114,6 +107,16 @@ components:
           description: Tags associated with this survey response.
           items:
             $ref: '#/components/schemas/SurveyResponseTag'
+    SurveyAnswer:
+      type: object
+      description: An individual answer to a survey question within a response.
+      properties:
+        question_id:
+          type: string
+          description: The unique identifier of the question being answered.
+        answer:
+          type: string
+          description: The text of the answer provided by the respondent.
     Error:
       type: object
       description: An error response returned by the API when a request fails.
@@ -137,16 +140,13 @@ components:
           type: string
           nullable: true
           description: The cursor value to use for fetching the next page. Null when there are no more results.
-    SurveyAnswer:
+    SurveyResponseTag:
       type: object
-      description: An individual answer to a survey question within a response.
+      description: A tag associated with a survey response for categorization and filtering.
       properties:
-        question_id:
+        name:
           type: string
-          description: The unique identifier of the question being answered.
-        answer:
-          type: string
-          description: The text of the answer provided by the respondent.
+          description: The name of the tag.
   securitySchemes:
     bearerAuth:
       type: http
