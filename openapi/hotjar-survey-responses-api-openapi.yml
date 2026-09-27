@@ -55,6 +55,20 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -64,20 +78,6 @@ components:
         type: integer
         minimum: 1
         maximum: 100
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
     SiteId:
       name: site_id
       in: path
@@ -86,6 +86,46 @@ components:
       schema:
         type: integer
   schemas:
+    SurveyResponseListResponse:
+      type: object
+      description: A paginated list of survey responses with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: The list of survey responses returned in this page.
+          items:
+            $ref: '#/components/schemas/SurveyResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
+    SurveyResponseTag:
+      type: object
+      description: A tag associated with a survey response for categorization and filtering.
+      properties:
+        name:
+          type: string
+          description: The name of the tag.
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    SurveyAnswer:
+      type: object
+      description: An individual answer to a survey question within a response.
+      properties:
+        question_id:
+          type: string
+          description: The unique identifier of the question being answered.
+        answer:
+          type: string
+          description: The text of the answer provided by the respondent.
     SurveyResponse:
       type: object
       description: A single response to a Hotjar survey, containing the answers provided by a respondent.
@@ -107,46 +147,6 @@ components:
           description: Tags associated with this survey response.
           items:
             $ref: '#/components/schemas/SurveyResponseTag'
-    SurveyAnswer:
-      type: object
-      description: An individual answer to a survey question within a response.
-      properties:
-        question_id:
-          type: string
-          description: The unique identifier of the question being answered.
-        answer:
-          type: string
-          description: The text of the answer provided by the respondent.
-    Error:
-      type: object
-      description: An error response returned by the API when a request fails.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
-    SurveyResponseListResponse:
-      type: object
-      description: A paginated list of survey responses with cursor-based pagination support.
-      properties:
-        results:
-          type: array
-          description: The list of survey responses returned in this page.
-          items:
-            $ref: '#/components/schemas/SurveyResponse'
-        next_cursor:
-          type: string
-          nullable: true
-          description: The cursor value to use for fetching the next page. Null when there are no more results.
-    SurveyResponseTag:
-      type: object
-      description: A tag associated with a survey response for categorization and filtering.
-      properties:
-        name:
-          type: string
-          description: The name of the tag.
   securitySchemes:
     bearerAuth:
       type: http

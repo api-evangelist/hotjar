@@ -90,6 +90,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
     Limit:
       name: limit
       in: query
@@ -106,13 +113,6 @@ components:
       description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
       schema:
         type: string
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
     WithQuestions:
       name: with_questions
       in: query
@@ -129,19 +129,6 @@ components:
       schema:
         type: integer
   schemas:
-    SurveyListResponse:
-      type: object
-      description: A paginated list of surveys with cursor-based pagination support.
-      properties:
-        results:
-          type: array
-          description: The list of surveys returned in this page.
-          items:
-            $ref: '#/components/schemas/Survey'
-        next_cursor:
-          type: string
-          nullable: true
-          description: The cursor value to use for fetching the next page. Null when there are no more results.
     SurveyQuestion:
       type: object
       description: A question within a Hotjar survey, including its type, text, and available answer options.
@@ -172,16 +159,6 @@ components:
           type: string
           nullable: true
           description: URL of an image attached to the question. Null if no image is attached.
-    Error:
-      type: object
-      description: An error response returned by the API when a request fails.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
     Survey:
       type: object
       description: A Hotjar survey with its configuration, status, and optional question details.
@@ -216,6 +193,29 @@ components:
           description: The list of questions in the survey. Only included when with_questions parameter is set to true.
           items:
             $ref: '#/components/schemas/SurveyQuestion'
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    SurveyListResponse:
+      type: object
+      description: A paginated list of surveys with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: The list of surveys returned in this page.
+          items:
+            $ref: '#/components/schemas/Survey'
+        next_cursor:
+          type: string
+          nullable: true
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
   securitySchemes:
     bearerAuth:
       type: http
