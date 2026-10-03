@@ -54,38 +54,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of items to return per page. Maximum value is 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-    SiteId:
-      name: site_id
-      in: path
-      required: true
-      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
-      schema:
-        type: integer
   schemas:
+    SurveyAnswer:
+      type: object
+      description: An individual answer to a survey question within a response.
+      properties:
+        question_id:
+          type: string
+          description: The unique identifier of the question being answered.
+        answer:
+          type: string
+          description: The text of the answer provided by the respondent.
     SurveyResponseListResponse:
       type: object
       description: A paginated list of survey responses with cursor-based pagination support.
@@ -116,16 +95,6 @@ components:
         message:
           type: string
           description: A human-readable description of the error.
-    SurveyAnswer:
-      type: object
-      description: An individual answer to a survey question within a response.
-      properties:
-        question_id:
-          type: string
-          description: The unique identifier of the question being answered.
-        answer:
-          type: string
-          description: The text of the answer provided by the respondent.
     SurveyResponse:
       type: object
       description: A single response to a Hotjar survey, containing the answers provided by a respondent.
@@ -147,6 +116,37 @@ components:
           description: Tags associated with this survey response.
           items:
             $ref: '#/components/schemas/SurveyResponseTag'
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

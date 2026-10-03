@@ -61,6 +61,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
     OAuthToken:
       type: object
       description: An OAuth 2.0 access token response returned after successful client credentials authentication.
@@ -76,16 +86,6 @@ components:
         expires_in:
           type: integer
           description: The number of seconds until the access token expires.
-    Error:
-      type: object
-      description: An error response returned by the API when a request fails.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
   securitySchemes:
     bearerAuth:
       type: http

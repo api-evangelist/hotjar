@@ -90,22 +90,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of items to return per page. Maximum value is 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
     Cursor:
       name: cursor
       in: query
@@ -121,6 +105,22 @@ components:
       schema:
         type: boolean
         default: false
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
     SiteId:
       name: site_id
       in: path
