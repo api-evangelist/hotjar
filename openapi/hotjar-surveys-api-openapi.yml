@@ -89,76 +89,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
-    WithQuestions:
-      name: with_questions
-      in: query
-      required: false
-      description: Flag indicating whether question information should be included in the response. Defaults to false.
-      schema:
-        type: boolean
-        default: false
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of items to return per page. Maximum value is 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
-    SiteId:
-      name: site_id
-      in: path
-      required: true
-      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
-      schema:
-        type: integer
   schemas:
-    SurveyQuestion:
+    Error:
       type: object
-      description: A question within a Hotjar survey, including its type, text, and available answer options.
+      description: An error response returned by the API when a request fails.
       properties:
-        id:
-          type: integer
-          description: The unique identifier for the question.
-        text:
+        error:
           type: string
-          description: The text content of the question displayed to respondents.
-        type:
+          description: The error type or code.
+        message:
           type: string
-          description: The type of question, such as long-text, short-text, rating, multiple-choice, or nps.
-        is_required:
-          type: boolean
-          description: Whether the question requires an answer before submission.
-        choices:
+          description: A human-readable description of the error.
+    SurveyListResponse:
+      type: object
+      description: A paginated list of surveys with cursor-based pagination support.
+      properties:
+        results:
           type: array
-          nullable: true
-          description: The list of answer choices for multiple-choice questions. Null for open-ended question types.
+          description: The list of surveys returned in this page.
           items:
-            type: string
-        labels:
-          type: object
-          nullable: true
-          description: Labels for rating or scale questions. Null for other question types.
-        image_url:
+            $ref: '#/components/schemas/Survey'
+        next_cursor:
           type: string
           nullable: true
-          description: URL of an image attached to the question. Null if no image is attached.
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
     Survey:
       type: object
       description: A Hotjar survey with its configuration, status, and optional question details.
@@ -193,29 +147,75 @@ components:
           description: The list of questions in the survey. Only included when with_questions parameter is set to true.
           items:
             $ref: '#/components/schemas/SurveyQuestion'
-    Error:
+    SurveyQuestion:
       type: object
-      description: An error response returned by the API when a request fails.
+      description: A question within a Hotjar survey, including its type, text, and available answer options.
       properties:
-        error:
+        id:
+          type: integer
+          description: The unique identifier for the question.
+        text:
           type: string
-          description: The error type or code.
-        message:
+          description: The text content of the question displayed to respondents.
+        type:
           type: string
-          description: A human-readable description of the error.
-    SurveyListResponse:
-      type: object
-      description: A paginated list of surveys with cursor-based pagination support.
-      properties:
-        results:
+          description: The type of question, such as long-text, short-text, rating, multiple-choice, or nps.
+        is_required:
+          type: boolean
+          description: Whether the question requires an answer before submission.
+        choices:
           type: array
-          description: The list of surveys returned in this page.
+          nullable: true
+          description: The list of answer choices for multiple-choice questions. Null for open-ended question types.
           items:
-            $ref: '#/components/schemas/Survey'
-        next_cursor:
+            type: string
+        labels:
+          type: object
+          nullable: true
+          description: Labels for rating or scale questions. Null for other question types.
+        image_url:
           type: string
           nullable: true
-          description: The cursor value to use for fetching the next page. Null when there are no more results.
+          description: URL of an image attached to the question. Null if no image is attached.
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
+    WithQuestions:
+      name: with_questions
+      in: query
+      required: false
+      description: Flag indicating whether question information should be included in the response. Defaults to false.
+      schema:
+        type: boolean
+        default: false
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

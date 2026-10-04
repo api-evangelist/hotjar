@@ -55,16 +55,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SurveyAnswer:
+    Error:
       type: object
-      description: An individual answer to a survey question within a response.
+      description: An error response returned by the API when a request fails.
       properties:
-        question_id:
+        error:
           type: string
-          description: The unique identifier of the question being answered.
-        answer:
+          description: The error type or code.
+        message:
           type: string
-          description: The text of the answer provided by the respondent.
+          description: A human-readable description of the error.
+    SurveyResponseTag:
+      type: object
+      description: A tag associated with a survey response for categorization and filtering.
+      properties:
+        name:
+          type: string
+          description: The name of the tag.
     SurveyResponseListResponse:
       type: object
       description: A paginated list of survey responses with cursor-based pagination support.
@@ -78,23 +85,16 @@ components:
           type: string
           nullable: true
           description: The cursor value to use for fetching the next page. Null when there are no more results.
-    SurveyResponseTag:
+    SurveyAnswer:
       type: object
-      description: A tag associated with a survey response for categorization and filtering.
+      description: An individual answer to a survey question within a response.
       properties:
-        name:
+        question_id:
           type: string
-          description: The name of the tag.
-    Error:
-      type: object
-      description: An error response returned by the API when a request fails.
-      properties:
-        error:
+          description: The unique identifier of the question being answered.
+        answer:
           type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
+          description: The text of the answer provided by the respondent.
     SurveyResponse:
       type: object
       description: A single response to a Hotjar survey, containing the answers provided by a respondent.
@@ -117,13 +117,6 @@ components:
           items:
             $ref: '#/components/schemas/SurveyResponseTag'
   parameters:
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -133,18 +126,25 @@ components:
         type: integer
         minimum: 1
         maximum: 100
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
       schema:
-        type: integer
+        type: string
     SiteId:
       name: site_id
       in: path
       required: true
       description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
       schema:
         type: integer
   securitySchemes:
