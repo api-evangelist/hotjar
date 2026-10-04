@@ -150,6 +150,9 @@ apis:
     url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
 modified: '2026-09-16'
 common:
+- type: CapabilityMap
+  url: capabilities/hotjar-capability-edges.yml
+  name: Hotjar Business Capability Map
 - type: Website
   url: https://hotjar.com
 - type: AgenticAccess
