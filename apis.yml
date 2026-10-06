@@ -148,8 +148,10 @@ apis:
     url: openapi/hotjar-user-lookup-api-openapi.yml
   - type: Documentation
     url: https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference
-modified: '2026-09-16'
+modified: '2026-10-06'
 common:
+- url: https://contentsquare.com/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/hotjar-capability-edges.yml
   name: Hotjar Business Capability Map
