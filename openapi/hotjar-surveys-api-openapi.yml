@@ -89,30 +89,46 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
+      schema:
+        type: string
+    WithQuestions:
+      name: with_questions
+      in: query
+      required: false
+      description: Flag indicating whether question information should be included in the response. Defaults to false.
+      schema:
+        type: boolean
+        default: false
+    SurveyId:
+      name: survey_id
+      in: path
+      required: true
+      description: The unique identifier for the survey.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of items to return per page. Maximum value is 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    SiteId:
+      name: site_id
+      in: path
+      required: true
+      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
+      schema:
+        type: integer
   schemas:
-    Error:
-      type: object
-      description: An error response returned by the API when a request fails.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
-    SurveyListResponse:
-      type: object
-      description: A paginated list of surveys with cursor-based pagination support.
-      properties:
-        results:
-          type: array
-          description: The list of surveys returned in this page.
-          items:
-            $ref: '#/components/schemas/Survey'
-        next_cursor:
-          type: string
-          nullable: true
-          description: The cursor value to use for fetching the next page. Null when there are no more results.
     Survey:
       type: object
       description: A Hotjar survey with its configuration, status, and optional question details.
@@ -177,45 +193,29 @@ components:
           type: string
           nullable: true
           description: URL of an image attached to the question. Null if no image is attached.
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of items to return per page. Maximum value is 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      description: The cursor value for fetching the next page of results. Obtained from the next_cursor field in a previous response.
-      schema:
-        type: string
-    SiteId:
-      name: site_id
-      in: path
-      required: true
-      description: The unique identifier for the site. Can be found in the Sites and Organizations page under the respective organization.
-      schema:
-        type: integer
-    WithQuestions:
-      name: with_questions
-      in: query
-      required: false
-      description: Flag indicating whether question information should be included in the response. Defaults to false.
-      schema:
-        type: boolean
-        default: false
-    SurveyId:
-      name: survey_id
-      in: path
-      required: true
-      description: The unique identifier for the survey.
-      schema:
-        type: integer
+    Error:
+      type: object
+      description: An error response returned by the API when a request fails.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    SurveyListResponse:
+      type: object
+      description: A paginated list of surveys with cursor-based pagination support.
+      properties:
+        results:
+          type: array
+          description: The list of surveys returned in this page.
+          items:
+            $ref: '#/components/schemas/Survey'
+        next_cursor:
+          type: string
+          nullable: true
+          description: The cursor value to use for fetching the next page. Null when there are no more results.
   securitySchemes:
     bearerAuth:
       type: http
