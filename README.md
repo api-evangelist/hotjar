@@ -1,4 +1,4 @@
-# hotjar (hotjar)
+# Hotjar
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,105 +66,165 @@
 
 Hotjar is a behavior analytics and user feedback platform that helps businesses understand how users interact with their website through heatmaps, session recordings, surveys, and feedback widgets.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hotjar/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hotjar/refs/heads/main/apis.yml)
+**Areas:** Analytics · Surveys · Tracking · Personalization · Segmentation
 
-## Timestamps
+## Hotjar on APIs.io
 
-- **Modified:** 2026-05-19
+Everything profiled for Hotjar is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hotjar/](https://apis.io/providers/hotjar/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (7)
 
-### Hotjar REST API
+- [Hotjar Events API](https://apis.io/apis/hotjar/events-api/) — The Hotjar Events API is a client-side JavaScript API that allows developers to send custom events to Hotjar when specific actions take place on a website.…
+- [Hotjar Identify API](https://apis.io/apis/hotjar/identify-api/) — The Hotjar Identify API is a client-side JavaScript API that allows developers to pass user data to Hotjar, saving it as User Attributes. These attributes…
+- [Hotjar JavaScript SDK](https://apis.io/apis/hotjar/javascript-sdk/) — The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic interface for integrating Hotjar directly into JavaScript…
+- [hotjar Authentication API](https://apis.io/apis/hotjar/hotjar-authentication-api/) — OAuth 2.0 client credentials authentication endpoints for obtaining access tokens.
+- [hotjar Survey Responses API](https://apis.io/apis/hotjar/hotjar-survey-responses-api/) — Endpoints for exporting and listing survey response data with cursor-based pagination.
+- [hotjar Surveys API](https://apis.io/apis/hotjar/hotjar-surveys-api/) — Endpoints for listing surveys and retrieving survey details for a specific site.
+- [hotjar User Lookup API](https://apis.io/apis/hotjar/hotjar-user-lookup-api/) — Endpoints for looking up user data and submitting deletion requests for GDPR compliance.
 
-The Hotjar REST API provides programmatic access to Hotjar data and functionality. It allows developers to export survey responses, automate user lookup and deletion requests, and integrate Hotjar data into external tools and workflows. The API uses OAuth client credentials authentication, returns JSON responses, supports cursor-based pagination, and is rate limited to 3000 requests per minute. It is available on Observe and Ask Scale plans.
+### Published properties
 
-- **Human URL:** [https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference](https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference)
-- **Base URL:** `https://api.hotjar.com`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-#### Tags
+#### Agentic access (1)
 
-- Analytics
-- Behavior
-- Heatmaps
-- Surveys
-- User Feedback
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Hotjar Agentic Access](https://apis.io/agentic-access/hotjar/hotjar-agentic-access/)
 
-- [Documentation](https://help.hotjar.com/hc/en-us/articles/36820005914001-Hotjar-API-Reference)
-- [OpenAPI](openapi/hotjar-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hotjar-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hotjar-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Schema (13)
 
-### Hotjar Events API
+The data models the API reads and writes.
 
-The Hotjar Events API is a client-side JavaScript API that allows developers to send custom events to Hotjar when specific actions take place on a website. These events can be used to filter collected Recordings and Heatmap data, trigger session capture, and target Surveys to appear based on user behavior. Events are sent using the Hotjar tracking code and are available on all pages where the tracking snippet is installed.
+- [Error](https://apis.io/schemas/hotjar/hotjar-error/)
+- [OAuthToken](https://apis.io/schemas/hotjar/hotjar-oauthtoken/)
+- [Hotjar Survey](https://apis.io/schemas/hotjar/hotjar-survey/)
+- [Hotjar Survey Response](https://apis.io/schemas/hotjar/hotjar-survey-response/)
+- [SurveyAnswer](https://apis.io/schemas/hotjar/hotjar-surveyanswer/)
+- [SurveyListResponse](https://apis.io/schemas/hotjar/hotjar-surveylistresponse/)
+- [SurveyQuestion](https://apis.io/schemas/hotjar/hotjar-surveyquestion/)
+- [SurveyResponse](https://apis.io/schemas/hotjar/hotjar-surveyresponse/)
+- [SurveyResponseListResponse](https://apis.io/schemas/hotjar/hotjar-surveyresponselistresponse/)
+- [SurveyResponseTag](https://apis.io/schemas/hotjar/hotjar-surveyresponsetag/)
+- [Hotjar User Lookup Request](https://apis.io/schemas/hotjar/hotjar-user-lookup/)
+- [UserLookupRequest](https://apis.io/schemas/hotjar/hotjar-userlookuprequest/)
+- [UserLookupResponse](https://apis.io/schemas/hotjar/hotjar-userlookupresponse/)
 
-- **Human URL:** [https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference](https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference)
-- **Base URL:** `https://api.example.com`
+#### JSON Structure (1)
 
-#### Tags
+Data models expressed in JSON Structure.
 
-- Analytics
-- Events
-- Heatmaps
-- Recordings
-- Surveys
-- Tracking
+- [Hotjar Structure](https://apis.io/json-structure/hotjar/hotjar-structure/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://help.hotjar.com/hc/en-us/articles/36819965075473-Events-API-Reference)
-- [Postman Collection](collections/hotjar-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hotjar-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Linked-data contexts for the provider's vocabulary.
 
-### Hotjar Identify API
+- [Hotjar Context](https://apis.io/jsonld/hotjar/hotjar-context/)
 
-The Hotjar Identify API is a client-side JavaScript API that allows developers to pass user data to Hotjar, saving it as User Attributes. These attributes enable advanced filtering and segmentation of Hotjar data such as Recordings, Heatmaps, and Surveys. The Identify API must be called before the Events API in the execution order. It is used via the Hotjar tracking code on pages where the JavaScript snippet is installed.
+#### Vocabulary (1)
 
-- **Human URL:** [https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference](https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference)
-- **Base URL:** `https://api.example.com`
+The provider's domain terms, defined.
 
-#### Tags
+- [Hotjar Domain Vocabulary](https://apis.io/vocabularies/hotjar/hotjar-vocabulary/)
 
-- Analytics
-- Attributes
-- Personalization
-- Segmentation
-- Users
+#### Collections (5)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://help.hotjar.com/hc/en-us/articles/36820006120721-Identify-API-Reference)
-- [Postman Collection](collections/hotjar-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hotjar-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Hotjar REST Authentication API](https://apis.io/collections/hotjar/open-hotjar-authentication-api/)
+- [Hotjar REST API](https://apis.io/collections/hotjar/open-hotjar-rest-api/)
+- [Hotjar REST Authentication Survey Responses API](https://apis.io/collections/hotjar/open-hotjar-survey-responses-api/)
+- [Hotjar REST Authentication Surveys API](https://apis.io/collections/hotjar/open-hotjar-surveys-api/)
+- [Hotjar REST Authentication User Lookup API](https://apis.io/collections/hotjar/open-hotjar-user-lookup-api/)
 
-### Hotjar JavaScript SDK
+#### Governance rules (1)
 
-The Hotjar JavaScript SDK (@hotjar/browser) is an npm package that provides a programmatic interface for integrating Hotjar directly into JavaScript applications. It allows developers to initialize Hotjar with a site ID, identify users, and send custom events without manually embedding the tracking script. The SDK supports modern JavaScript frameworks including React, Vue, and Angular, and provides methods for all Hotjar client-side APIs including identify and event tracking.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://github.com/hotjar/hotjar-js](https://github.com/hotjar/hotjar-js)
-- **Base URL:** `https://api.example.com`
+- [Hotjar — jsonschema rules](https://apis.io/rules/hotjar/hotjar-jsonschema-spectral-rules/)
 
-#### Tags
+#### Security (2)
 
-- Analytics
-- Browser
-- JavaScript
-- SDK
-- Tracking
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Hotjar Authentication](https://apis.io/security/hotjar/hotjar-authentication/)
+- [Hotjar Domain Security](https://apis.io/security/hotjar/hotjar-domain-security/)
 
-- [Documentation](https://github.com/hotjar/hotjar-js)
-- [Postman Collection](collections/hotjar-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hotjar-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-## Common Properties
+Published plans, tiers and prices.
 
-- [LinkedIn](https://www.linkedin.com/company/hotjar)
-- [JSON-LD](json-ld/hotjar-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/hotjar-survey-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/hotjar-survey-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/hotjar-user-lookup-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Features](undefined)
+- [Hotjar Plans Pricing](https://apis.io/plans/hotjar/hotjar-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Hotjar Rate Limits](https://apis.io/rate-limits/hotjar/hotjar-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Hotjar Finops](https://apis.io/finops/hotjar/hotjar-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://hotjar.com)
+- [Blog](https://contentsquare.com/blog/)
+
+## API Evangelist rating
+
+**Kin Score 26.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 51.8 |
+| Contract quality | 55.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hotjar/](https://apis.io/providers/hotjar/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hotjar: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hotjar/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
